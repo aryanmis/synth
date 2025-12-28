@@ -1,7 +1,9 @@
 {
 	"InstallScripts" : 
 	[
-		"/Users/aryanmistry/Desktop/CodeDir/SynthStuff/synth/build/cmake_install.cmake"
+		"/Users/aryanmistry/Desktop/CodeDir/SynthStuff/synth/build/cmake_install.cmake",
+		"/Users/aryanmistry/Desktop/CodeDir/SynthStuff/synth/build/_deps/glfw-build/cmake_install.cmake",
+		"/Users/aryanmistry/Desktop/CodeDir/SynthStuff/synth/build/_deps/glfw-build/src/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

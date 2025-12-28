@@ -48,10 +48,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /opt/anaconda3/lib/python3.13/site-packages/cmake/data/bin/cmake
+CMAKE_COMMAND = /opt/homebrew/bin/cmake
 
 # The command to remove a file.
-RM = /opt/anaconda3/lib/python3.13/site-packages/cmake/data/bin/cmake -E rm -f
+RM = /opt/homebrew/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -68,7 +68,7 @@ CMAKE_BINARY_DIR = /Users/aryanmistry/Desktop/CodeDir/SynthStuff/synth/build
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake cache editor..."
-	/opt/anaconda3/lib/python3.13/site-packages/cmake/data/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/opt/homebrew/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -78,12 +78,57 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake to regenerate build system..."
-	/opt/anaconda3/lib/python3.13/site-packages/cmake/data/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/opt/homebrew/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+.PHONY : list_install_components/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
+	/opt/homebrew/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
+	/opt/homebrew/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
+	/opt/homebrew/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
+	/opt/homebrew/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
+	/opt/homebrew/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
+	/opt/homebrew/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -117,48 +162,292 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named synth
+# Target rules for targets named imgui_lib
 
 # Build rule for target.
-synth: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 synth
-.PHONY : synth
+imgui_lib: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 imgui_lib
+.PHONY : imgui_lib
 
 # fast build rule for target.
-synth/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/build
-.PHONY : synth/fast
+imgui_lib/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui_lib.dir/build.make CMakeFiles/imgui_lib.dir/build
+.PHONY : imgui_lib/fast
 
-SynthVoice.o: SynthVoice.cpp.o
-.PHONY : SynthVoice.o
+#=============================================================================
+# Target rules for targets named minisynth
+
+# Build rule for target.
+minisynth: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 minisynth
+.PHONY : minisynth
+
+# fast build rule for target.
+minisynth/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minisynth.dir/build.make CMakeFiles/minisynth.dir/build
+.PHONY : minisynth/fast
+
+#=============================================================================
+# Target rules for targets named uninstall
+
+# Build rule for target.
+uninstall: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 uninstall
+.PHONY : uninstall
+
+# fast build rule for target.
+uninstall/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/glfw-build/CMakeFiles/uninstall.dir/build.make _deps/glfw-build/CMakeFiles/uninstall.dir/build
+.PHONY : uninstall/fast
+
+#=============================================================================
+# Target rules for targets named update_mappings
+
+# Build rule for target.
+update_mappings: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 update_mappings
+.PHONY : update_mappings
+
+# fast build rule for target.
+update_mappings/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/glfw-build/src/CMakeFiles/update_mappings.dir/build.make _deps/glfw-build/src/CMakeFiles/update_mappings.dir/build
+.PHONY : update_mappings/fast
+
+#=============================================================================
+# Target rules for targets named glfw
+
+# Build rule for target.
+glfw: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 glfw
+.PHONY : glfw
+
+# fast build rule for target.
+glfw/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/glfw-build/src/CMakeFiles/glfw.dir/build.make _deps/glfw-build/src/CMakeFiles/glfw.dir/build
+.PHONY : glfw/fast
+
+Oscillator.o: Oscillator.cpp.o
+.PHONY : Oscillator.o
 
 # target to build an object file
-SynthVoice.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/SynthVoice.cpp.o
-.PHONY : SynthVoice.cpp.o
+Oscillator.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minisynth.dir/build.make CMakeFiles/minisynth.dir/Oscillator.cpp.o
+.PHONY : Oscillator.cpp.o
 
-SynthVoice.i: SynthVoice.cpp.i
-.PHONY : SynthVoice.i
+Oscillator.i: Oscillator.cpp.i
+.PHONY : Oscillator.i
 
 # target to preprocess a source file
-SynthVoice.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/SynthVoice.cpp.i
-.PHONY : SynthVoice.cpp.i
+Oscillator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minisynth.dir/build.make CMakeFiles/minisynth.dir/Oscillator.cpp.i
+.PHONY : Oscillator.cpp.i
 
-SynthVoice.s: SynthVoice.cpp.s
-.PHONY : SynthVoice.s
+Oscillator.s: Oscillator.cpp.s
+.PHONY : Oscillator.s
 
 # target to generate assembly for a file
-SynthVoice.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/SynthVoice.cpp.s
-.PHONY : SynthVoice.cpp.s
+Oscillator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minisynth.dir/build.make CMakeFiles/minisynth.dir/Oscillator.cpp.s
+.PHONY : Oscillator.cpp.s
+
+Synth.o: Synth.cpp.o
+.PHONY : Synth.o
+
+# target to build an object file
+Synth.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minisynth.dir/build.make CMakeFiles/minisynth.dir/Synth.cpp.o
+.PHONY : Synth.cpp.o
+
+Synth.i: Synth.cpp.i
+.PHONY : Synth.i
+
+# target to preprocess a source file
+Synth.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minisynth.dir/build.make CMakeFiles/minisynth.dir/Synth.cpp.i
+.PHONY : Synth.cpp.i
+
+Synth.s: Synth.cpp.s
+.PHONY : Synth.s
+
+# target to generate assembly for a file
+Synth.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minisynth.dir/build.make CMakeFiles/minisynth.dir/Synth.cpp.s
+.PHONY : Synth.cpp.s
+
+_deps/imgui-src/backends/imgui_impl_glfw.o: _deps/imgui-src/backends/imgui_impl_glfw.cpp.o
+.PHONY : _deps/imgui-src/backends/imgui_impl_glfw.o
+
+# target to build an object file
+_deps/imgui-src/backends/imgui_impl_glfw.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui_lib.dir/build.make CMakeFiles/imgui_lib.dir/_deps/imgui-src/backends/imgui_impl_glfw.cpp.o
+.PHONY : _deps/imgui-src/backends/imgui_impl_glfw.cpp.o
+
+_deps/imgui-src/backends/imgui_impl_glfw.i: _deps/imgui-src/backends/imgui_impl_glfw.cpp.i
+.PHONY : _deps/imgui-src/backends/imgui_impl_glfw.i
+
+# target to preprocess a source file
+_deps/imgui-src/backends/imgui_impl_glfw.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui_lib.dir/build.make CMakeFiles/imgui_lib.dir/_deps/imgui-src/backends/imgui_impl_glfw.cpp.i
+.PHONY : _deps/imgui-src/backends/imgui_impl_glfw.cpp.i
+
+_deps/imgui-src/backends/imgui_impl_glfw.s: _deps/imgui-src/backends/imgui_impl_glfw.cpp.s
+.PHONY : _deps/imgui-src/backends/imgui_impl_glfw.s
+
+# target to generate assembly for a file
+_deps/imgui-src/backends/imgui_impl_glfw.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui_lib.dir/build.make CMakeFiles/imgui_lib.dir/_deps/imgui-src/backends/imgui_impl_glfw.cpp.s
+.PHONY : _deps/imgui-src/backends/imgui_impl_glfw.cpp.s
+
+_deps/imgui-src/backends/imgui_impl_opengl3.o: _deps/imgui-src/backends/imgui_impl_opengl3.cpp.o
+.PHONY : _deps/imgui-src/backends/imgui_impl_opengl3.o
+
+# target to build an object file
+_deps/imgui-src/backends/imgui_impl_opengl3.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui_lib.dir/build.make CMakeFiles/imgui_lib.dir/_deps/imgui-src/backends/imgui_impl_opengl3.cpp.o
+.PHONY : _deps/imgui-src/backends/imgui_impl_opengl3.cpp.o
+
+_deps/imgui-src/backends/imgui_impl_opengl3.i: _deps/imgui-src/backends/imgui_impl_opengl3.cpp.i
+.PHONY : _deps/imgui-src/backends/imgui_impl_opengl3.i
+
+# target to preprocess a source file
+_deps/imgui-src/backends/imgui_impl_opengl3.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui_lib.dir/build.make CMakeFiles/imgui_lib.dir/_deps/imgui-src/backends/imgui_impl_opengl3.cpp.i
+.PHONY : _deps/imgui-src/backends/imgui_impl_opengl3.cpp.i
+
+_deps/imgui-src/backends/imgui_impl_opengl3.s: _deps/imgui-src/backends/imgui_impl_opengl3.cpp.s
+.PHONY : _deps/imgui-src/backends/imgui_impl_opengl3.s
+
+# target to generate assembly for a file
+_deps/imgui-src/backends/imgui_impl_opengl3.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui_lib.dir/build.make CMakeFiles/imgui_lib.dir/_deps/imgui-src/backends/imgui_impl_opengl3.cpp.s
+.PHONY : _deps/imgui-src/backends/imgui_impl_opengl3.cpp.s
+
+_deps/imgui-src/imgui.o: _deps/imgui-src/imgui.cpp.o
+.PHONY : _deps/imgui-src/imgui.o
+
+# target to build an object file
+_deps/imgui-src/imgui.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui_lib.dir/build.make CMakeFiles/imgui_lib.dir/_deps/imgui-src/imgui.cpp.o
+.PHONY : _deps/imgui-src/imgui.cpp.o
+
+_deps/imgui-src/imgui.i: _deps/imgui-src/imgui.cpp.i
+.PHONY : _deps/imgui-src/imgui.i
+
+# target to preprocess a source file
+_deps/imgui-src/imgui.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui_lib.dir/build.make CMakeFiles/imgui_lib.dir/_deps/imgui-src/imgui.cpp.i
+.PHONY : _deps/imgui-src/imgui.cpp.i
+
+_deps/imgui-src/imgui.s: _deps/imgui-src/imgui.cpp.s
+.PHONY : _deps/imgui-src/imgui.s
+
+# target to generate assembly for a file
+_deps/imgui-src/imgui.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui_lib.dir/build.make CMakeFiles/imgui_lib.dir/_deps/imgui-src/imgui.cpp.s
+.PHONY : _deps/imgui-src/imgui.cpp.s
+
+_deps/imgui-src/imgui_draw.o: _deps/imgui-src/imgui_draw.cpp.o
+.PHONY : _deps/imgui-src/imgui_draw.o
+
+# target to build an object file
+_deps/imgui-src/imgui_draw.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui_lib.dir/build.make CMakeFiles/imgui_lib.dir/_deps/imgui-src/imgui_draw.cpp.o
+.PHONY : _deps/imgui-src/imgui_draw.cpp.o
+
+_deps/imgui-src/imgui_draw.i: _deps/imgui-src/imgui_draw.cpp.i
+.PHONY : _deps/imgui-src/imgui_draw.i
+
+# target to preprocess a source file
+_deps/imgui-src/imgui_draw.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui_lib.dir/build.make CMakeFiles/imgui_lib.dir/_deps/imgui-src/imgui_draw.cpp.i
+.PHONY : _deps/imgui-src/imgui_draw.cpp.i
+
+_deps/imgui-src/imgui_draw.s: _deps/imgui-src/imgui_draw.cpp.s
+.PHONY : _deps/imgui-src/imgui_draw.s
+
+# target to generate assembly for a file
+_deps/imgui-src/imgui_draw.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui_lib.dir/build.make CMakeFiles/imgui_lib.dir/_deps/imgui-src/imgui_draw.cpp.s
+.PHONY : _deps/imgui-src/imgui_draw.cpp.s
+
+_deps/imgui-src/imgui_tables.o: _deps/imgui-src/imgui_tables.cpp.o
+.PHONY : _deps/imgui-src/imgui_tables.o
+
+# target to build an object file
+_deps/imgui-src/imgui_tables.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui_lib.dir/build.make CMakeFiles/imgui_lib.dir/_deps/imgui-src/imgui_tables.cpp.o
+.PHONY : _deps/imgui-src/imgui_tables.cpp.o
+
+_deps/imgui-src/imgui_tables.i: _deps/imgui-src/imgui_tables.cpp.i
+.PHONY : _deps/imgui-src/imgui_tables.i
+
+# target to preprocess a source file
+_deps/imgui-src/imgui_tables.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui_lib.dir/build.make CMakeFiles/imgui_lib.dir/_deps/imgui-src/imgui_tables.cpp.i
+.PHONY : _deps/imgui-src/imgui_tables.cpp.i
+
+_deps/imgui-src/imgui_tables.s: _deps/imgui-src/imgui_tables.cpp.s
+.PHONY : _deps/imgui-src/imgui_tables.s
+
+# target to generate assembly for a file
+_deps/imgui-src/imgui_tables.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui_lib.dir/build.make CMakeFiles/imgui_lib.dir/_deps/imgui-src/imgui_tables.cpp.s
+.PHONY : _deps/imgui-src/imgui_tables.cpp.s
+
+_deps/imgui-src/imgui_widgets.o: _deps/imgui-src/imgui_widgets.cpp.o
+.PHONY : _deps/imgui-src/imgui_widgets.o
+
+# target to build an object file
+_deps/imgui-src/imgui_widgets.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui_lib.dir/build.make CMakeFiles/imgui_lib.dir/_deps/imgui-src/imgui_widgets.cpp.o
+.PHONY : _deps/imgui-src/imgui_widgets.cpp.o
+
+_deps/imgui-src/imgui_widgets.i: _deps/imgui-src/imgui_widgets.cpp.i
+.PHONY : _deps/imgui-src/imgui_widgets.i
+
+# target to preprocess a source file
+_deps/imgui-src/imgui_widgets.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui_lib.dir/build.make CMakeFiles/imgui_lib.dir/_deps/imgui-src/imgui_widgets.cpp.i
+.PHONY : _deps/imgui-src/imgui_widgets.cpp.i
+
+_deps/imgui-src/imgui_widgets.s: _deps/imgui-src/imgui_widgets.cpp.s
+.PHONY : _deps/imgui-src/imgui_widgets.s
+
+# target to generate assembly for a file
+_deps/imgui-src/imgui_widgets.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui_lib.dir/build.make CMakeFiles/imgui_lib.dir/_deps/imgui-src/imgui_widgets.cpp.s
+.PHONY : _deps/imgui-src/imgui_widgets.cpp.s
+
+gui.o: gui.cpp.o
+.PHONY : gui.o
+
+# target to build an object file
+gui.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minisynth.dir/build.make CMakeFiles/minisynth.dir/gui.cpp.o
+.PHONY : gui.cpp.o
+
+gui.i: gui.cpp.i
+.PHONY : gui.i
+
+# target to preprocess a source file
+gui.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minisynth.dir/build.make CMakeFiles/minisynth.dir/gui.cpp.i
+.PHONY : gui.cpp.i
+
+gui.s: gui.cpp.s
+.PHONY : gui.s
+
+# target to generate assembly for a file
+gui.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minisynth.dir/build.make CMakeFiles/minisynth.dir/gui.cpp.s
+.PHONY : gui.cpp.s
 
 main.o: main.cpp.o
 .PHONY : main.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minisynth.dir/build.make CMakeFiles/minisynth.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -166,7 +455,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minisynth.dir/build.make CMakeFiles/minisynth.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -174,7 +463,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minisynth.dir/build.make CMakeFiles/minisynth.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -184,11 +473,43 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
+	@echo "... install"
+	@echo "... install/local"
+	@echo "... install/strip"
+	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... synth"
-	@echo "... SynthVoice.o"
-	@echo "... SynthVoice.i"
-	@echo "... SynthVoice.s"
+	@echo "... uninstall"
+	@echo "... update_mappings"
+	@echo "... glfw"
+	@echo "... imgui_lib"
+	@echo "... minisynth"
+	@echo "... Oscillator.o"
+	@echo "... Oscillator.i"
+	@echo "... Oscillator.s"
+	@echo "... Synth.o"
+	@echo "... Synth.i"
+	@echo "... Synth.s"
+	@echo "... _deps/imgui-src/backends/imgui_impl_glfw.o"
+	@echo "... _deps/imgui-src/backends/imgui_impl_glfw.i"
+	@echo "... _deps/imgui-src/backends/imgui_impl_glfw.s"
+	@echo "... _deps/imgui-src/backends/imgui_impl_opengl3.o"
+	@echo "... _deps/imgui-src/backends/imgui_impl_opengl3.i"
+	@echo "... _deps/imgui-src/backends/imgui_impl_opengl3.s"
+	@echo "... _deps/imgui-src/imgui.o"
+	@echo "... _deps/imgui-src/imgui.i"
+	@echo "... _deps/imgui-src/imgui.s"
+	@echo "... _deps/imgui-src/imgui_draw.o"
+	@echo "... _deps/imgui-src/imgui_draw.i"
+	@echo "... _deps/imgui-src/imgui_draw.s"
+	@echo "... _deps/imgui-src/imgui_tables.o"
+	@echo "... _deps/imgui-src/imgui_tables.i"
+	@echo "... _deps/imgui-src/imgui_tables.s"
+	@echo "... _deps/imgui-src/imgui_widgets.o"
+	@echo "... _deps/imgui-src/imgui_widgets.i"
+	@echo "... _deps/imgui-src/imgui_widgets.s"
+	@echo "... gui.o"
+	@echo "... gui.i"
+	@echo "... gui.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
