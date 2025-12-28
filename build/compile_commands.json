@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/Users/aryanmistry/Desktop/CodeDir/SynthStuff/synth/build",
+  "command": "/usr/bin/c++  -I/opt/homebrew/include -g -std=gnu++17 -arch arm64 -o CMakeFiles/synth.dir/main.cpp.o -c /Users/aryanmistry/Desktop/CodeDir/SynthStuff/synth/main.cpp",
+  "file": "/Users/aryanmistry/Desktop/CodeDir/SynthStuff/synth/main.cpp",
+  "output": "CMakeFiles/synth.dir/main.cpp.o"
+},
+{
+  "directory": "/Users/aryanmistry/Desktop/CodeDir/SynthStuff/synth/build",
+  "command": "/usr/bin/c++  -I/opt/homebrew/include -g -std=gnu++17 -arch arm64 -o CMakeFiles/synth.dir/SynthVoice.cpp.o -c /Users/aryanmistry/Desktop/CodeDir/SynthStuff/synth/SynthVoice.cpp",
+  "file": "/Users/aryanmistry/Desktop/CodeDir/SynthStuff/synth/SynthVoice.cpp",
+  "output": "CMakeFiles/synth.dir/SynthVoice.cpp.o"
+}
+]

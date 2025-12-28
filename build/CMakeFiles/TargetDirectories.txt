@@ -1,0 +1,3 @@
+/Users/aryanmistry/Desktop/CodeDir/SynthStuff/synth/build/CMakeFiles/synth.dir
+/Users/aryanmistry/Desktop/CodeDir/SynthStuff/synth/build/CMakeFiles/edit_cache.dir
+/Users/aryanmistry/Desktop/CodeDir/SynthStuff/synth/build/CMakeFiles/rebuild_cache.dir
